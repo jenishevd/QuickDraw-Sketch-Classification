@@ -1,0 +1,11 @@
+torch
+torchvision
+numpy
+requests
+scikit-learn
+matplotlib
+seaborn
+gradio
+pillow
+jupyter
+umap-learn
