@@ -67,6 +67,14 @@ def predict(input_image):
     with torch.no_grad():
         probs = torch.softmax(model(tensor), dim=1).squeeze().cpu().numpy()
 
+    top1_confidence = float(probs.max())
+    # With 12 classes, an uninformative softmax is 1/12 (about 0.083).
+    # Requiring 0.42—roughly five times that baseline—avoids presenting a
+    # weak preference as a prediction. Temperature calibration on validation
+    # data would make this cutoff more reliable, but is out of scope here.
+    if top1_confidence < 0.42:
+        return {"Not confident enough — try drawing more clearly": 1.0}
+
     top3 = probs.argsort()[-3:][::-1]
     return {CLASSES[i]: float(probs[i]) for i in top3}
 
