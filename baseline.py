@@ -5,11 +5,11 @@ Flattens each 28x28 image to 784 pixels and trains a linear classifier.
 
 """
 
+import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 CLASSES  = [
     "airplane", "banana", "car", "cat", "clock",

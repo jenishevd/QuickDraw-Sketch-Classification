@@ -9,15 +9,16 @@ Produces:
 
 """
 
-import torch
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
-from sklearn.metrics import classification_report, confusion_matrix
+import torch
 from sklearn.manifold import TSNE
+from sklearn.metrics import classification_report, confusion_matrix
 from torch.utils.data import DataLoader
-from train import SketchDataset, CLASSES
+
 from model import SketchCNN
+from train import CLASSES, SketchDataset
 
 # Load model and data
 
