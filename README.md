@@ -120,3 +120,12 @@ committing on the agent's self-reported test claims alone. One thing I checked
 specifically: the ink-check and the existing background-polarity logic
 (`gray.mean() > 127`) both reason about foreground/background — I verified they
 stayed consistent rather than silently duplicating or contradicting each other.
+
+## Running with Docker
+
+    docker build -t quickdraw-demo .
+    docker run -p 7860:7860 quickdraw-demo
+
+Note: `sketch_model.pt` (trained weights) is not included in the image or repo.
+Either mount a local checkpoint at build/run time, or run `train.py` first to
+generate one.
