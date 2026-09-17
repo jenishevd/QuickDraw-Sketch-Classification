@@ -29,7 +29,19 @@ def predict(input_image):
     if input_image is None:
         return {}
 
-    arr = np.asarray(input_image)
+    try:
+        arr = np.asarray(input_image)
+        valid_array = (
+            arr.size > 0
+            and (arr.ndim == 2 or (arr.ndim == 3 and arr.shape[-1] in (1, 3, 4)))
+            and np.issubdtype(arr.dtype, np.number)
+            and np.isfinite(arr).all()
+        )
+    except (TypeError, ValueError):
+        return {}
+
+    if not valid_array:
+        return {}
 
     # Convert to grayscale using RGB channels (NOT alpha).
     # The sketchpad has a white background (RGB=255) with black strokes (RGB=0).
