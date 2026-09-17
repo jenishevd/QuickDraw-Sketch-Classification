@@ -43,6 +43,18 @@ def predict(input_image):
     if gray.max() <= 1.0:
         gray = gray * 255.0
 
+    # Require at least 0.1% of the canvas to contain ink (with a two-pixel
+    # floor).  This rejects an empty canvas and isolated dots while allowing
+    # thin but intentional sketches; the check happens before downsampling so
+    # a tiny mark cannot turn into a seemingly meaningful 28x28 feature.
+    if gray.mean() > 127:
+        ink_mask = gray < 245
+    else:
+        ink_mask = gray > 10
+    min_ink_pixels = max(2, int(np.ceil(gray.size * 0.001)))
+    if np.count_nonzero(ink_mask) < min_ink_pixels:
+        return {"Draw something recognizable": 1.0}
+
     bitmap = np.array(Image.fromarray(gray.astype(np.uint8)).convert("L").resize((28, 28)))
 
     # QuickDraw: bright = ink. Invert if background is bright.
