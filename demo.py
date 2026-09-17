@@ -2,12 +2,13 @@
 Interactive Gradio demo — draw a sketch, get a prediction.
 """
 
-import torch
-import numpy as np
-from PIL import Image
 import gradio as gr
-from train import CLASSES
+import numpy as np
+import torch
+from PIL import Image
+
 from model import SketchCNN
+from train import CLASSES
 
 CHECKPOINT = "sketch_model.pt"
 INK_FRACTION = 0.001

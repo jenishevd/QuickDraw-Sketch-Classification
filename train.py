@@ -3,10 +3,11 @@ Train the sketch classifier.
 
 """
 
-import torch
-import torch.nn as nn
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
+import torch
+from torch import nn
+from torch.utils.data import DataLoader, Dataset
+
 from model import SketchCNN
 
 #  Settings 

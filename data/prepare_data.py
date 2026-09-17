@@ -9,11 +9,12 @@ Saves processed splits to data/processed/.
 """
 
 import json
+from pathlib import Path
+from urllib.parse import quote
+
 import numpy as np
 import requests
-from pathlib import Path
 from sklearn.model_selection import train_test_split
-from urllib.parse import quote
 
 CLASSES = [
     "airplane", "banana", "car", "cat", "clock",
@@ -86,7 +87,7 @@ def main():
     with open(PROCESSED_DIR / "class_to_idx.json", "w") as f:
         json.dump(class_to_idx, f, indent=2)
 
-    print(f"\nDone.")
+    print("\nDone.")
     print(f"  train: {len(X_train)}  val: {len(X_val)}  test: {len(X_test)}")
     print(f"  saved to {PROCESSED_DIR}")
 
